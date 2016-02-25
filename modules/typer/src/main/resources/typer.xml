@@ -1,0 +1,11 @@
+<module>
+    <command id="cmd.typer.type">
+        <pattern value="(*писать|*пиши*) [* текст*] $Text"/>
+    </command>
+
+    <module id="typer.text">
+        <command id="cmd.typer.type">
+            <pattern value="$Text"/>
+        </command>
+    </module>
+</module>

@@ -1,0 +1,8 @@
+{
+  "main": "com.aggregate.tts.ivona.IvonaTextToSpeech",
+  "config": {
+    "voice" : "Tatyana",
+    "gender" : "female",
+    "lang" : "ru-RU"
+  }
+}

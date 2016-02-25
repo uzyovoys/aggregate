@@ -1,0 +1,14 @@
+<module>
+    <command id="cmd.datetime.time">
+        <pattern value="* который * час *"/>
+        <pattern value="* скольк* * врем* *"/>
+        <pattern value="время"/>
+    </command>
+
+    <command id="cmd.datetime.date">
+        <pattern value="[* как*] {(день [недели] | дата) [* $Date]}"/>
+        <command id="cmd.datetime.date">
+            <pattern value="* $Date"/>
+        </command>
+    </command>
+</module>
