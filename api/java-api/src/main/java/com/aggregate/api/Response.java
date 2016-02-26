@@ -10,11 +10,24 @@ import java.util.List;
 import static java.util.Collections.*;
 
 /**
- * Created by morfeusys on 22.02.16.
+ * Represents response from speech processing module
+ *
+ * @author morfeusys
  */
 public class Response extends JsonObject {
+    /**
+     * List of output speech strings (could be empty)
+     */
     public final List<String> speeches;
+
+    /**
+     * Module's id to switch dialog's context (optional)
+     */
     public final String moduleId;
+
+    /**
+     * If switching context is modal or not
+     */
     public final boolean modal;
 
     public Response(String speech) {
@@ -47,6 +60,11 @@ public class Response extends JsonObject {
     }
 
 
+    /**
+     * Converts Json object to Response instance
+     * @param json JsonObject
+     * @return Response instance
+     */
     public static Response fromJson(JsonObject json) {
         JsonArray array = json.getJsonArray("speeches", new JsonArray());
         List<String> speeches = new ArrayList<>(array.size());

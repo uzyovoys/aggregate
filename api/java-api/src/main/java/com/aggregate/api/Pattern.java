@@ -1,7 +1,9 @@
 package com.aggregate.api;
 
 /**
- * Created by morfeusys on 23.02.16.
+ * Contains standard pattern names
+ *
+ * @author morfeusys
  */
 public class Pattern {
     public static final String TEXT = "Text";
