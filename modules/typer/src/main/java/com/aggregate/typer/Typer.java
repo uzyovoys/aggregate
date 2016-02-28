@@ -72,9 +72,9 @@ public class Typer extends AbstractVerticle {
     }
 
     private void keyReleased(int code) {
-        if (pressedKeys.contains(code)) {
+        if (pressedKeys.contains(code) && pressedKeys.containsAll(keySet)) {
             vertx.eventBus().publish("asr.stop", null);
-            pressedKeys.remove(code);
         }
+        pressedKeys.remove(code);
     }
 }

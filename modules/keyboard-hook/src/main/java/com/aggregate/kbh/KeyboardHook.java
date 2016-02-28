@@ -64,9 +64,10 @@ public class KeyboardHook extends AbstractVerticle implements NativeKeyListener 
     public void nativeKeyReleased(NativeKeyEvent event) {
         int code = event.getRawCode();
         vertx.eventBus().publish("key.released", code);
-        if (keySet.contains(code)) {
+        if (pressedKeys.contains(code)
+                && keySet.contains(code)
+                && pressedKeys.containsAll(keySet)) {
             vertx.eventBus().publish("asr.stop", null);
-            pressedKeys.clear();
         }
         pressedKeys.remove(code);
     }
