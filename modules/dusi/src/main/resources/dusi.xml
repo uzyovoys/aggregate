@@ -1,5 +1,0 @@
-<module id="com.aggregate.dusi">
-    <command id="cmd.dusi">
-        <pattern value="*"/>
-    </command>
-</module>
