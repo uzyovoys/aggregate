@@ -1,4 +1,4 @@
-![Агрегат](https://github.com/uzyovoys/aggregate/raw/master/Aggregate-logo.png)
+![Агрегат](https://github.com/uzyovoys/aggregate/raw/master/aggregate-logo.png)
 
 Проект Агрегат позволяет вам использовать голосовое управление _практически на любом компьютере_ с любой ОС и архитектурой процессора.
 Это может быть ПК на Windows, Linux или Mac OS X, или даже микрокомпьютер типа Raspberry Pi.
