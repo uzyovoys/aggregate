@@ -1,10 +1,10 @@
 <module>
-    <command id="cmd.typer.type">
+    <command id="cmd.dictation.type">
         <pattern value="(*писать|*пиши*) [* текст*] $Text"/>
     </command>
 
-    <module id="typer.text">
-        <command id="cmd.typer.type">
+    <module id="dictation.text">
+        <command id="cmd.dictation.type">
             <pattern value="$Text"/>
         </command>
     </module>

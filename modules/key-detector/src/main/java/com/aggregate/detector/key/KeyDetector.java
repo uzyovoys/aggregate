@@ -1,4 +1,4 @@
-package com.aggregate.kbh;
+package com.aggregate.detector.key;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -10,7 +10,6 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -18,8 +17,8 @@ import java.util.logging.Level;
 /**
  * Created by morfeusys on 18.02.16.
  */
-public class KeyboardHook extends AbstractVerticle implements NativeKeyListener {
-    private static Logger log = LoggerFactory.getLogger(KeyboardHook.class);
+public class KeyDetector extends AbstractVerticle implements NativeKeyListener {
+    private static Logger log = LoggerFactory.getLogger(KeyDetector.class);
 
     private Set<Integer> keySet = new HashSet<>();
     private Set<Integer> pressedKeys = new HashSet<>();
@@ -31,10 +30,10 @@ public class KeyboardHook extends AbstractVerticle implements NativeKeyListener 
         logger.setUseParentHandlers(false);
         JsonArray keys = config().getJsonArray("key-codes");
         if (keys == null || keys.isEmpty()) {
-            f.fail("No keys are defined for hook");
-            return;
+            log.warn("No keys are defined for hook");
+        } else {
+            keySet.addAll(keys.getList());
         }
-        keySet.addAll(keys.getList());
         try {
             GlobalScreen.registerNativeHook();
             GlobalScreen.addNativeKeyListener(this);

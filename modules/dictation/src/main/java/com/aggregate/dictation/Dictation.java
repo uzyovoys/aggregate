@@ -1,4 +1,4 @@
-package com.aggregate.typer;
+package com.aggregate.dictation;
 
 import com.aggregate.api.Pattern;
 import com.aggregate.api.Request;
@@ -19,8 +19,8 @@ import java.util.Set;
 /**
  * Created by morfeusys on 24.02.16.
  */
-public class Typer extends AbstractVerticle {
-    private static Logger log = LoggerFactory.getLogger(Typer.class);
+public class Dictation extends AbstractVerticle {
+    private static Logger log = LoggerFactory.getLogger(Dictation.class);
 
     private String osName;
     private Set<Integer> keySet = new HashSet<>();
@@ -35,7 +35,7 @@ public class Typer extends AbstractVerticle {
             vertx.eventBus().consumer("key.pressed", m -> keyPressed((Integer) m.body()));
             vertx.eventBus().consumer("key.released", m -> keyReleased((Integer) m.body()));
         }
-        vertx.eventBus().consumer("cmd.typer.type", m -> type(Request.fromMessage(m)));
+        vertx.eventBus().consumer("cmd.dictation.type", m -> type(Request.fromMessage(m)));
     }
 
     private void type(Request request) {
@@ -67,7 +67,7 @@ public class Typer extends AbstractVerticle {
         pressedKeys.add(code);
         if (pressedKeys.containsAll(keySet)) {
             vertx.eventBus().publish("asr.start", null);
-            vertx.eventBus().send("response", new Response("typer.text", true));
+            vertx.eventBus().send("response", new Response("dictation.text", true));
         }
     }
 
