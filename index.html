@@ -1,239 +1,407 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Голосовой ассистент Дуся">
-    <meta name="author" content="UseYoVoice">
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+    <head>
+    	<!-- meta character set -->
+        <meta charset="utf-8">
+		<!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Blue One Page HTML Template</title>		
+		<!-- Meta Description -->
+        <meta name="description" content="Blue One Page Creative HTML5 Template">
+        <meta name="keywords" content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
+        <meta name="author" content="Muhammad Morshed">
+		
+		<!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- CSS
+		================================================== -->
+		
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+		
+		<!-- Fontawesome Icon font -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+		<!-- bootstrap.min -->
+        <link rel="stylesheet" href="css/jquery.fancybox.css">
+		<!-- bootstrap.min -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+		<!-- bootstrap.min -->
+        <link rel="stylesheet" href="css/owl.carousel.css">
+		<!-- bootstrap.min -->
+        <link rel="stylesheet" href="css/slit-slider.css">
+		<!-- bootstrap.min -->
+        <link rel="stylesheet" href="css/animate.css">
+		<!-- Main Stylesheet -->
+        <link rel="stylesheet" href="css/main.css">
 
-    <title>Агрегат</title>
+		<!-- Modernizer Script for old Browsers -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    </head>
+	
+    <body id="body">
 
-    <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
-
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/creative.css" type="text/css">
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-41772694-3', 'auto');
-        ga('send', 'pageview');
-    </script>
-
-    <!-- Start of useyovoice Zendesk Widget script -->
-    <script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(c){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","useyovoice.zendesk.com");/*]]>*/</script>
-    <!-- End of useyovoice Zendesk Widget script -->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body id="page-top">
-
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Aggregate</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="page-scroll" href="http://blog.dusi.mobi">Блог</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="http://idea.dusi.mobi">Ваши идеи</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="http://blog.dusi.mobi/forum/">Форум</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#contact">Контакты</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
-
-<header>
-    <div class="header-content">
-        <div class="header-content-inner">
-            <video autoplay muted loop poster="">
-                <source src="Aggregate.m4v" type="video/mp4">
-            </video>
-        </div>
-    </div>
-</header>
-
-<section class="bg-primary" id="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Ваш личный голосовой ассистент</h2>
-                <hr class="light">
-                <p class="text-faded">Дуся - это голосовой ассистент для платформы Android, который умеет выполнять безграничное множество команд и управлять не только Вашим смартфоном</p>
-                <a href="https://www.youtube.com/watch?v=qS35rHyxuds" target="_blank" class="btn btn-default btn-xl">Как это работает?</a>
+		<!-- preloader -->
+		<div id="preloader">
+            <div class="loder-box">
+            	<div class="battery"></div>
             </div>
-        </div>
-    </div>
-</section>
+		</div>
+		<!-- end preloader -->
 
-<section id="services">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Что умеет Дуся</h2>
-                <hr class="primary">
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-microphone wow bounceIn text-primary"></i>
-                    <h3>Понимает Вашу речь</h3>
-                    <p class="text-muted">Дуся понимает даже очень сложные команды на русском языке</p>
+        <!--
+        Fixed Navigation
+        ==================================== -->
+        <header id="navigation" class="navbar-inverse navbar-fixed-top animated-header">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- responsive nav button -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+                    </button>
+					<!-- /responsive nav button -->
+					
+					<!-- logo -->
+					<h1 class="navbar-brand">
+						<a href="#body">Aggregate</a>
+					</h1>
+					<!-- /logo -->
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-cog wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                    <h3>Настраивается</h3>
-                    <p class="text-muted">У Дуси множество настроек для выполнения Ваших требований</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-mobile-phone wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                    <h3>Работает в фоне</h3>
-                    <p class="text-muted">Дуся может работать даже когда ее не видно на экране</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-code wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                    <h3>Программируется</h3>
-                    <p class="text-muted">Каждый может создать свои функции без единой строчки кода</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="no-padding" id="portfolio">
-    <div class="container-fluid">
-        <div class="row no-gutter">
-            <div class="col-lg-4 col-sm-6">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/qS35rHyxuds" frameborder="0" allowfullscreen></iframe>
+				<!-- main nav -->
+                <nav class="collapse navbar-collapse navbar-right" role="navigation">
+                    <ul id="nav" class="nav navbar-nav">
+                        <li><a href="#about">Что это</a></li>
+                        <li><a href="#portfolio">Описание</a></li>
+                        <li><a href="#social">Контакты</a></li>
+                    </ul>
+                </nav>
+				<!-- /main nav -->
+				
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/B_lF0CoZ-0c" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/h1h1s4A1F0g" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-lg-4 col-sm-6">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/xqWz-JN2R-g" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/tup8C2ZiRns" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/ax17Z1v3XYg" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-</section>
+        </header>
+        <!--
+        End Fixed Navigation
+        ==================================== -->
+		
+		<main class="site-content" role="main">
+		
+        <!--
+        Home Slider
+        ==================================== -->
+		
+		<section id="home-slider">
+            <div id="slider" class="sl-slider-wrapper">
 
-<aside class="bg-dark">
-    <div class="container text-center">
-        <div class="call-to-action">
-            <h2>Скачайте бесплатно на Google Play</h2>
-            <a href="https://play.google.com/store/apps/details?id=com.dusiassistant" class="btn btn-default btn-xl wow tada">Скачать</a>
-        </div>
-    </div>
-</aside>
+				<div class="sl-slider">
+				
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="bg-img bg-img-1"></div>
+					</div>
+					
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+					
+						<div class="bg-img bg-img-2"></div>
+						<div class="slide-caption">
+                            <div class="caption-content">
+                                <h2>Единая точка голосового управления</h2>
+                                <span>Управляйте компьютером и смартфоном из одной точки</span>
+                                <a href="#social" class="btn btn-blue btn-effect">Хочу!</a>
+                            </div>
+                        </div>
+						
+					</div>
+					
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+						
+						<div class="bg-img bg-img-3"></div>
+						<div class="slide-caption">
+                            <div class="caption-content">
+                                <h2>Открытый API</h2>
+                                <span>Создавайте свои модули и функции легко</span>
+                                <a href="#testimonials" class="btn btn-blue btn-effect">Хочу!</a>
+                            </div>
+                        </div>
 
-<section id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Оставайтесь на связи!</h2>
-                <hr class="primary">
-                <p>В нашем блоге, группе ВКонтакте и в сообществе Google+ Вы можете найти множество интересного из мира голосового управления!</p>
-            </div>
+					</div>
 
-        </div>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <a href="http://blog.dusi.mobi/"><i class="fa fa-wordpress fa-4x wow bounceIn"></i></a>
-            </div>
-            <div class="col-lg-3 text-center">
-                <a href="https://plus.google.com/u/0/communities/102112390188436612789"><i class="fa fa-google-plus fa-4x wow bounceIn"></i></a>
-            </div>
-            <div class="col-lg-3 text-center">
-                <a href="https://vk.com/dusi_mobi"><i class="fa fa-vk fa-4x wow bounceIn"></i></a>
-            </div>
-            <div class="col-lg-3 text-center">
-                <a href="https://www.youtube.com/channel/UC63necdCFfx4rURqxSq_AqA/"><i class="fa fa-youtube fa-4x wow bounceIn"></i></a>
-            </div>
-        </div>
-    </div>
-</section>
+				</div><!-- /sl-slider -->
 
-<!-- Footer -->
-<footer>
-    <div class="container text-center">
-        <p>Copyright &copy; UseYoVoice 2016</p>
-    </div>
-</footer>
+                <!-- 
+                <nav id="nav-arrows" class="nav-arrows">
+                    <span class="nav-arrow-prev">Previous</span>
+                    <span class="nav-arrow-next">Next</span>
+                </nav>
+                -->
+                
+                <nav id="nav-arrows" class="nav-arrows hidden-xs hidden-sm visible-md visible-lg">
+                    <a href="javascript:;" class="sl-prev">
+                        <i class="fa fa-angle-left fa-3x"></i>
+                    </a>
+                    <a href="javascript:;" class="sl-next">
+                        <i class="fa fa-angle-right fa-3x"></i>
+                    </a>
+                </nav>
+                
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
+				<nav id="nav-dots" class="nav-dots visible-xs visible-sm hidden-md hidden-lg">
+					<span class="nav-dot-current"></span>
+					<span></span>
+					<span></span>
+				</nav>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+			</div><!-- /slider-wrapper -->
+		</section>
+		
+        <!--
+        End Home SliderEnd
+        ==================================== -->
+			
+			<!-- about section -->
+			<section id="about" >
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5 wow animated fadeInLeft">
+							<div class="recent-works">
+								<h3>Что такое Агрегат?</h3>
+								<p>Это как Cortana под Windows 10, только лучше! Потому что Агрегат:</p>
+								<br/>
+								<ol>
+									<li>Понимает русский язык</li>
+									<li>Работает на компьютере с любой ОС</li>
+									<li>Запускается даже на Raspberry Pi</li>
+									<li>Умеет управлять любой удаленной техникой</li>
+									<li>Гибко настраивается под Ваши требования</li>
+									<li>Имеет открытый код и API для разработчиков</li>
+								</ol>
+							</div>
+						</div>
+						<div class="col-md-6 col-md-offset-1 wow animated fadeInRight">
+							<div class="welcome-block">
+								<h3>Зачем он мне?</h3>
+						     	 <div class="message-body">
+						       		<p>Управлять техникой с помощью своего голоса - это действительно удобно!
+										Вместо того, чтобы набирать сообщение или запрос на клавиатуре, его можно произнести.
+									Чтобы открыть сайт - достаточно сказать его адрес. Поставить таймер на смартфоне или создать напоминание?
+										Легко - не отрываясь от работы на ПК!</p>
+						     	 </div>
+						       	<a href="#social" class="btn btn-border btn-effect pull-right">Хочу!</a>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- end about section -->
 
-<!-- Plugin JavaScript -->
-<script src="js/jquery.easing.min.js"></script>
-<script src="js/jquery.fittext.js"></script>
-<script src="js/wow.min.js"></script>
+			<section id="video">
+				<div class="container">
+					<div class="row text-center wow animated fadeIn">
+						<div class="sec-title ">
+							<h2>Как это работает</h2>
+						</div>
+						<iframe width="853" height="480" src="https://www.youtube.com/embed/tRIIMY5VUlk" frameborder="0" allowfullscreen></iframe>
+					</div>
+				</div>
+			</section>
+			
+			<!-- Service section -->
+			<section id="service">
+				<div class="container">
+					<div class="row">
+					
+						<div class="sec-title text-center">
+							<h2 class="wow animated bounceInLeft">Самое важное</h2>
+						</div>
+						
+						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn">
+							<div class="service-item">
+								<div class="service-icon">
+									<i class="fa fa-windows fa-3x"></i>
+								</div>
+								<h3>Кроссплатформенный</h3>
+								<p>Агрегат работает на любой ОС - Windows, Mac OS и Linux.</p>
+							</div>
+						</div>
+					
+						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.3s">
+							<div class="service-item">
+								<div class="service-icon">
+									<i class="fa fa-cubes fa-3x"></i>
+								</div>
+								<h3>Модульный</h3>
+								<p>Вы сами выбираете, какие голосовые функции Вам нужны.</p>
+							</div>
+						</div>
+					
+						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.6s">
+							<div class="service-item">
+								<div class="service-icon">
+									<i class="fa fa-code fa-3x"></i>
+								</div>
+								<h3>Открытый</h3>
+								<p>Исходные коды и API доступны для сторонних разработчиков.</p>
+							</div>
+						</div>
+					
+						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.9s">
+							<div class="service-item">
+								<div class="service-icon">
+									<i class="fa fa-dollar fa-3x"></i>
+								</div>
+								
+								<h3>Бесплатный</h3>
+								<p>Вам не нужно платить за функционал ни цента.</p>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</section>
+			<!-- end Service section -->
+			
+			<!-- portfolio section -->
+			<section id="portfolio" class="parallax">
+				<div class="overlay">
+					<div class="container">
+						<div class="row">
+							<div class="sec-title text-center white wow animated fadeInDown">
+								<h2>Агрегат - словно конструктор Lego</h2>
+								<h3>Вы сами выбираете, какие модули установить и какими функциями пользоваться</h3>
+							</div>
+							<div class="text-center">
+								<p>Все зависит лишь от Ваших настроек. Например, Вы можете использовать любой голос для Вашего ассистента.
+									Или заменить распознавание речи Google на сервис от Яндекса.
+									Можно использовать клавиатуру для запуска ассистента, а можно - датчик приближения или голос.
+									Установите или разработайте нужный модуль - и соберите свой Агрегат!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- end portfolio section -->
 
-<!-- Custom Theme JavaScript -->
-<script src="js/creative.js"></script>
-
-<script src="js/jquery.cookie-1.4.1.min.js"></script>
-
-</body>
-
+			<section id="remote">
+				<div class="container">
+					<div class="row">
+						<div class="sec-title text-center wow animated fadeInDown">
+							<h2>Удаленное управление</h2>
+						</div>
+						<div class="col-md-4 text-center wow animated fadeInLeftBig">
+							<img src="img/dusi.png">
+						</div>
+						<div class="col-md-6 col-md-offset-1 wow animated fadeInRight">
+							<p>Включив в <a href="http://dusi.mobi">мобильном ассистенте Дуся</a> функцию удаленного управления, Вы можете отдавать ему голосовые команды прямо с вашего компьютера!
+								При этом ответ вы услышите не из смартфона, а из динамиков своего ПК.</p><br/>
+							<p>Даже не нужно брать телефон в руки! Вы можете запускать любые скрипты удаленно и получать результат прямо на экране Вашего компьютера.</p><br/>
+							<p><i>"Поставь песню про зайцев", "Напомни покормить кота через 2 часа", "Какие планы на вечер", "Создай заметку"</i> - вот примеры того, как вы можете командовать своему смартфону, не отрываясь от работы на ПК.</p><br/>
+							<p>Агрегат работает как единая точка управления любой техникой. И при этом - это не штатная функция самого Агрегата, а лишь один из модулей.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- Testimonial section -->
+			<section id="testimonials" class="parallax">
+				<div class="overlay">
+					<div class="container">
+						<div class="row">
+							<div class="sec-title text-center white wow animated fadeInDown">
+								<h2>Raspberry Pi</h2>
+							</div>
+							<div class="text-center">
+								<p>Агрегат можно запустить даже на микрокомпьютерах типа Raspberry Pi. Нет ничего лучше для создания компактного голосового помощника, который поместится в небольшой коробочке. К нему можно подключить разнообразные сенсоры и превратить в настоящего робота.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- end Testimonial section -->
+			
+			<!-- Price section -->
+			<section id="price">
+				<div class="container">
+					<div class="row">
+						<div class="sec-title text-center wow animated fadeInDown">
+							<h2>Открытый код</h2>
+							<p>Создавать голосового ассистента - легко!</p>
+						</div>
+					</div>
+					<div class="row wow animated fadeInUp">
+						<div class="col-lg-4" style="margin-top: 20px">
+							<p>Больше функций - больше возможностей. Только открытый проект развивается быстро и дает настоящую свободу воображению.</p><br/>
+							<p>Агрегат - это проект с открытым исходным кодом. С помощью открытого API Вы можете сами создавать дополнительные функциональные модули и публиковать их.</p><br/>
+							<p>Исходные коды модулей и документация для сторонних разработчиков доступны в <a href="https://github.com/uzyovoys/aggregate">репозитории GitHub</a>.</p>
+						</div>
+						<div class="col-lg-8">
+							<img src="img/github.png" alt="github">
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- end Price section -->
+			
+			<!-- Social section -->
+			<section id="social" class="parallax">
+				<div class="overlay">
+					<div class="container">
+						<div class="row">
+						
+							<div class="sec-title text-center white wow animated fadeInDown">
+								<h2>Контакты</h2>
+								<p>Начните использовать Агрегат прямо сейчас</p>
+							</div>
+							
+							<ul class="social-button">
+								<li class="wow animated zoomIn"><a href="https://github.com/uzyovoys/aggregate"><i class="fa fa-github fa-2x"></i></a></li>
+								<li class="wow animated zoomIn" data-wow-delay="0.3s"><a href="https://www.youtube.com/channel/UC63necdCFfx4rURqxSq_AqA"><i class="fa fa-youtube-play fa-2x"></i></a></li>
+								<li class="wow animated zoomIn" data-wow-delay="0.6s"><a href="https://plus.google.com/communities/107842291040103298448"><i class="fa fa-google-plus fa-2x"></i></a></li>
+							</ul>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- end Social section -->
+		</main>
+		
+		<footer id="footer">
+			<div class="container">
+				<div class="row text-center">
+					<div class="footer-content">
+						<p>UseYoVoice &copy; 2016</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		
+		<!-- Essential jQuery Plugins
+		================================================== -->
+		<!-- Main jQuery -->
+        <script src="js/jquery-1.11.1.min.js"></script>
+		<!-- Twitter Bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
+		<!-- Single Page Nav -->
+        <script src="js/jquery.singlePageNav.min.js"></script>
+		<!-- jquery.fancybox.pack -->
+        <script src="js/jquery.fancybox.pack.js"></script>
+		<!-- Google Map API -->
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<!-- Owl Carousel -->
+        <script src="js/owl.carousel.min.js"></script>
+        <!-- jquery easing -->
+        <script src="js/jquery.easing.min.js"></script>
+        <!-- Fullscreen slider -->
+        <script src="js/jquery.slitslider.js"></script>
+        <script src="js/jquery.ba-cond.min.js"></script>
+		<!-- onscroll animation -->
+        <script src="js/wow.min.js"></script>
+		<!-- Custom Functions -->
+        <script src="js/main.js"></script>
+    </body>
 </html>
