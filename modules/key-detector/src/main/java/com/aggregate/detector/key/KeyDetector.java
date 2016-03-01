@@ -54,7 +54,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener {
         if (pressedKeys.contains(code)) return;
         pressedKeys.add(code);
         log.info("Keys: " + pressedKeys);
-        if (pressedKeys.containsAll(keySet)) {
+        if (!keySet.isEmpty() && pressedKeys.containsAll(keySet)) {
             log.info("Keyset detected");
             vertx.eventBus().publish("asr.start", null);
         }
