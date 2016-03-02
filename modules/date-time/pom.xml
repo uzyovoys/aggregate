@@ -9,6 +9,20 @@
     <artifactId>date-time</artifactId>
     <version>1.0.0</version>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-aggregate</id>
+            <url>https://api.bintray.com/maven/uzyovoys/aggregate/date-time/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>bintray-aggregate</id>
+            <url>https://dl.bintray.com/uzyovoys/aggregate</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.aggregate</groupId>

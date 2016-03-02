@@ -9,6 +9,13 @@
     <artifactId>dictation</artifactId>
     <version>1.0.0</version>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-aggregate</id>
+            <url>https://api.bintray.com/maven/uzyovoys/aggregate/dictation/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>bintray-aggregate</id>

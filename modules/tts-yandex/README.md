@@ -1,6 +1,8 @@
 ### Синтезатор речи Яндекс
 Данный модуль позволяет использовать онлайн сервис Яндекс SpeechKit для синтеза речи.
 
+[Скачать версию 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/tts-yandex/1.0.0/tts-yandex-1.0.0.jar)
+
 #### Установка
 Для работы необходимо получить у Яндекса персональный ключ доступа к сервису.
 О том, как получить этот ключ, [можно прочитать здесь](https://tech.yandex.ru/speechkit/cloud/doc/intro/faq/concepts/about-docpage/#q4_30).

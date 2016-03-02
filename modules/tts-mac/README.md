@@ -1,6 +1,8 @@
 ### Синтезатор речи для Mac OS X
 Этот модуль использует встроенный в Mac OS X синтезатор речи.
 
+[Скачать версию 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/tts-mac/1.0.0/tts-mac-1.0.0.jar)
+
 #### Установка
 Нужно включить синтез речи в системных настройках компьютера.
 
