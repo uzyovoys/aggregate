@@ -72,6 +72,13 @@ main > section {
     color: #fff;
 }
 
+.btn-red {
+    background-color: rgba(227, 0, 8, 0.78);
+    box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.15) inset;
+    padding: 15px 55px;
+    color: #fff;
+}
+
 .btn-border {
     border: 2px solid #fff;
     color: #fff;
@@ -516,7 +523,7 @@ h1.navbar-brand {
 	About
 ==================================================================*/
 
-#about {
+#about, #alpha {
     background-color: #e3c900;
     color: #212121;
 }
@@ -1037,7 +1044,7 @@ textarea.form-control {
 
 #footer {
     background-color: #2E2E2E;
-    padding: 70px 0;
+    padding: 30px 0;
     color: #fff;
 }
 
