@@ -9,9 +9,11 @@
 **Ключ доступа**
 Для его получения вам, во-первых, нужно иметь учетную запись Google. Во-вторых, вам нужно подписаться на chromium-dev@chromium.org (подписаться нужно [здесь](https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-dev)).
 
-Теперь вы можете получить свой Google API ключ. Для этого зайдите в [Google developer console](http://cloud.google.com/console). Здесь вам нужно создать проект. После создания проекта нужно активировать Speech API в секции APIs под пунктом APIs & auth в левом меню.
+Теперь вы можете получить свой Google API ключ. Для этого зайдите в [Google developer console](http://cloud.google.com/console). Здесь вам нужно создать проект. После создания проекта нужно активировать Speech API.  
 
-Ключ Google API можно получить в разделе Credentials под тим же пунктом APIs & auth. Здесь нужно создать ключ нажатием на кнопку Create new Key в секции Public API access. **Нужен ключ под названием Browser key**.
+На экране Dashboard вы можете увидеть небольшое окно с заголовком "Explore other services". Нажмите в нем на "Enable APIs and get credentials like keys". В появившемся окне наберите в поле ввода поискового запроса слово "speech". В списке появится "Speech API". Нажмите на него и актвируйте.
+
+Здесь нужно создать ключ нажатием на кнопку "Create new Key" в секции "Public API access". **Нужен ключ под названием Browser key**.
 
 **Настройка модуля**
 Перед установкой данного модуля создайте файл _asr-google.json_ в директории _conf_. В нем укажите ваш ключ доступа. Пример:
