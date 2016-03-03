@@ -11,7 +11,7 @@
 
 Теперь вы можете получить свой Google API ключ. Для этого зайдите в [Google developer console](http://cloud.google.com/console). Здесь вам нужно создать проект. После создания проекта нужно активировать Speech API в секции APIs под пунктом APIs & auth в левом меню.
 
-Ключ Google API можно получить в разделе Credentials под тим же пунктом APIs & auth. Здесь нужно создать ключ нажатием на кнопку Create new Key в секции Public API access.
+Ключ Google API можно получить в разделе Credentials под тим же пунктом APIs & auth. Здесь нужно создать ключ нажатием на кнопку Create new Key в секции Public API access. **Нужен ключ под названием Browser key**.
 
 **Настройка модуля**
 Перед установкой данного модуля создайте файл _asr-google.json_ в директории _conf_. В нем укажите ваш ключ доступа. Пример:
