@@ -38,6 +38,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         }
         try {
             GlobalScreen.registerNativeHook();
+            GlobalScreen.addNativeMouseListener(this);
             GlobalScreen.addNativeKeyListener(this);
             f.complete();
         } catch (NativeHookException e) {
@@ -50,8 +51,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         GlobalScreen.unregisterNativeHook();
     }
 
-    public void nativeKeyPressed(NativeKeyEvent event) {
-        int code = event.getRawCode();
+    private void keyPressed(int code) {
         vertx.eventBus().publish("key.pressed", code);
         if (pressedKeys.contains(code)) return;
         pressedKeys.add(code);
@@ -62,8 +62,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         }
     }
 
-    public void nativeKeyReleased(NativeKeyEvent event) {
-        int code = event.getRawCode();
+    private void keyReleased(int code) {
         vertx.eventBus().publish("key.released", code);
         if (pressedKeys.contains(code)
                 && keySet.contains(code)
@@ -71,6 +70,17 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
             vertx.eventBus().publish("asr.stop", null);
         }
         pressedKeys.remove(code);
+    }
+
+
+    public void nativeKeyPressed(NativeKeyEvent event) {
+        int code = event.getRawCode();
+        keyPressed(code);
+    }
+
+    public void nativeKeyReleased(NativeKeyEvent event) {
+        int code = event.getRawCode();
+        keyReleased(code);
     }
 
     public void nativeKeyTyped(NativeKeyEvent event) {
@@ -78,40 +88,27 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
 
 
     public void nativeMouseClicked(NativeMouseEvent event) {
-	    //log.info("Mouse Clicked: " + e.getClickCount());
+        //log.info("Mouse Clicked: " + e.getClickCount());
     }
 
     public void nativeMousePressed(NativeMouseEvent event) {
         int code = event.getButton();
-        vertx.eventBus().publish("key.pressed", code);
-        if (pressedKeys.contains(code)) return;
-        pressedKeys.add(code);
-        log.info("Keys: " + pressedKeys);
-        if (!keySet.isEmpty() && pressedKeys.containsAll(keySet)) {
-            log.info("Keyset detected");
-            vertx.eventBus().publish("asr.start", null);
-        }
-	    //log.info("Mouse Pressed: " + event.getButton());
+        keyPressed(code);
+        //log.info("Mouse Pressed: " + event.getButton());
     }
 
     public void nativeMouseReleased(NativeMouseEvent event) {
         int code = event.getButton();
-        vertx.eventBus().publish("key.released", code);
-        if (pressedKeys.contains(code)
-                && keySet.contains(code)
-                && pressedKeys.containsAll(keySet)) {
-            vertx.eventBus().publish("asr.stop", null);
-        }
-        pressedKeys.remove(code);
-	    //log.info("Mouse Released: " + event.getButton());
+        keyReleased(code);
+        //log.info("Mouse Released: " + event.getButton());
     }
 
     public void nativeMouseMoved(NativeMouseEvent event) {
-	    //log.info("Mouse Moved: " + e.getX() + ", " + e.getY());
+        //log.info("Mouse Moved: " + e.getX() + ", " + e.getY());
     }
 
     public void nativeMouseDragged(NativeMouseEvent event) {
-	    //log.info("Mouse Dragged: " + e.getX() + ", " + e.getY());
+        //log.info("Mouse Dragged: " + e.getX() + ", " + e.getY());
     }
 
 }
