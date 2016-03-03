@@ -19,7 +19,7 @@ import java.util.logging.Level;
 /**
  * Created by morfeusys on 18.02.16.
  */
-public class KeyDetector extends AbstractVerticle implements NativeKeyListener implements NativeMouseInputListener {
+public class KeyDetector extends AbstractVerticle implements NativeKeyListener, NativeMouseInputListener {
     private static Logger log = LoggerFactory.getLogger(KeyDetector.class);
 
     private Set<Integer> keySet = new HashSet<>();
