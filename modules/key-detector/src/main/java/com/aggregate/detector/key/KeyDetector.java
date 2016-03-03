@@ -9,6 +9,8 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+import org.jnativehook.mouse.NativeMouseEvent;
+import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +19,7 @@ import java.util.logging.Level;
 /**
  * Created by morfeusys on 18.02.16.
  */
-public class KeyDetector extends AbstractVerticle implements NativeKeyListener {
+public class KeyDetector extends AbstractVerticle implements NativeKeyListener implements NativeMouseInputListener {
     private static Logger log = LoggerFactory.getLogger(KeyDetector.class);
 
     private Set<Integer> keySet = new HashSet<>();
@@ -73,4 +75,43 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener {
 
     public void nativeKeyTyped(NativeKeyEvent event) {
     }
+
+
+    public void nativeMouseClicked(NativeMouseEvent event) {
+	    //log.info("Mouse Clicked: " + e.getClickCount());
+    }
+
+    public void nativeMousePressed(NativeMouseEvent event) {
+        int code = event.getButton();
+        vertx.eventBus().publish("key.pressed", code);
+        if (pressedKeys.contains(code)) return;
+        pressedKeys.add(code);
+        log.info("Keys: " + pressedKeys);
+        if (!keySet.isEmpty() && pressedKeys.containsAll(keySet)) {
+            log.info("Keyset detected");
+            vertx.eventBus().publish("asr.start", null);
+        }
+	    //log.info("Mouse Pressed: " + event.getButton());
+    }
+
+    public void nativeMouseReleased(NativeMouseEvent event) {
+        int code = event.getButton();
+        vertx.eventBus().publish("key.released", code);
+        if (pressedKeys.contains(code)
+                && keySet.contains(code)
+                && pressedKeys.containsAll(keySet)) {
+            vertx.eventBus().publish("asr.stop", null);
+        }
+        pressedKeys.remove(code);
+	    //log.info("Mouse Released: " + event.getButton());
+    }
+
+    public void nativeMouseMoved(NativeMouseEvent event) {
+	    //log.info("Mouse Moved: " + e.getX() + ", " + e.getY());
+    }
+
+    public void nativeMouseDragged(NativeMouseEvent event) {
+	    //log.info("Mouse Dragged: " + e.getX() + ", " + e.getY());
+    }
+
 }
