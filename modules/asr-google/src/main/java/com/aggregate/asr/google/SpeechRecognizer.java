@@ -36,7 +36,6 @@ public class SpeechRecognizer extends AbstractVerticle {
     private String myApiKey;
     private String myLang;
     private TargetDataLine myDataLine;
-    private BlockingQueue<byte[]> myQueue = new ArrayBlockingQueue<>(1000);
 
     private volatile boolean myListening;
     private volatile boolean myError;
@@ -106,9 +105,9 @@ public class SpeechRecognizer extends AbstractVerticle {
         myListening = true;
         myError = false;
         myCanceled = false;
-        myQueue.clear();
-        myRecorderThread = new RecorderThread();
-        myRecognizerThread = new RecognizerThread();
+        ArrayBlockingQueue<byte[]> queue = new ArrayBlockingQueue<>(8192);
+        myRecorderThread = new RecorderThread(queue);
+        myRecognizerThread = new RecognizerThread(queue);
         myRecorderThread.start();
         myRecognizerThread.start();
     }
@@ -132,8 +131,13 @@ public class SpeechRecognizer extends AbstractVerticle {
     }
 
     private class RecorderThread extends Thread {
+        private BlockingQueue<byte[]> queue;
         private byte[] buffer = new byte[1024];
         private volatile boolean stopped;
+
+        private RecorderThread(BlockingQueue<byte[]> queue) {
+            this.queue = queue;
+        }
 
         private void finish() {
             stopped = true;
@@ -158,14 +162,19 @@ public class SpeechRecognizer extends AbstractVerticle {
         private void record() {
             int len = myDataLine.read(buffer, 0, buffer.length);
             if (len > 0) {
-                myQueue.add(Arrays.copyOf(buffer, len));
+                queue.add(Arrays.copyOf(buffer, len));
             }
         }
     }
 
     private class RecognizerThread extends Thread {
+        private ArrayBlockingQueue<byte[]> queue;
         private volatile boolean stopped;
         private OutputStream outputStream;
+
+        private RecognizerThread(ArrayBlockingQueue<byte[]> queue) {
+            this.queue = queue;
+        }
 
         private void finish() {
             stopped = true;
@@ -173,7 +182,7 @@ public class SpeechRecognizer extends AbstractVerticle {
 
         private void flushQueue() throws IOException {
             ArrayList<byte[]> data = new ArrayList<>();
-            myQueue.drainTo(data);
+            queue.drainTo(data);
             for (byte[] buffer : data) {
                 outputStream.write(buffer, 0, buffer.length);
             }
@@ -193,7 +202,7 @@ public class SpeechRecognizer extends AbstractVerticle {
         private void stream() throws Exception {
             if (!stopped) flushQueue();
             while (!stopped) {
-                byte[] buffer = myQueue.poll(10, TimeUnit.MILLISECONDS);
+                byte[] buffer = queue.poll(10, TimeUnit.MILLISECONDS);
                 if (buffer != null) {
                     outputStream.write(buffer, 0, buffer.length);
                 }
