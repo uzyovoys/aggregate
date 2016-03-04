@@ -52,8 +52,8 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
     }
 
     private void keyPressed(int code) {
-        vertx.eventBus().publish("key.pressed", code);
         if (pressedKeys.contains(code)) return;
+        vertx.eventBus().publish("key.pressed", code);
         pressedKeys.add(code);
         log.info("Keys: " + pressedKeys);
         if (!keySet.isEmpty() && pressedKeys.containsAll(keySet)) {
@@ -63,50 +63,52 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
     }
 
     private void keyReleased(int code) {
-        vertx.eventBus().publish("key.released", code);
-        if (pressedKeys.contains(code)
-                && keySet.contains(code)
-                && pressedKeys.containsAll(keySet)) {
-            vertx.eventBus().publish("asr.stop", null);
+        if (pressedKeys.contains(code)) {
+            vertx.eventBus().publish("key.released", code);
+            if (keySet.contains(code) && pressedKeys.containsAll(keySet)) {
+                vertx.eventBus().publish("asr.stop", null);
+            }
         }
         pressedKeys.remove(code);
     }
 
-
+    @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
-        int code = event.getRawCode();
-        keyPressed(code);
+        keyPressed(event.getRawCode());
     }
 
+    @Override
     public void nativeKeyReleased(NativeKeyEvent event) {
-        int code = event.getRawCode();
-        keyReleased(code);
+        keyReleased(event.getRawCode());
     }
 
+    @Override
     public void nativeKeyTyped(NativeKeyEvent event) {
     }
 
-
+    @Override
     public void nativeMouseClicked(NativeMouseEvent event) {
         //log.info("Mouse Clicked: " + e.getClickCount());
     }
 
+    @Override
     public void nativeMousePressed(NativeMouseEvent event) {
-        int code = event.getButton();
-        keyPressed(code);
+        keyPressed(event.getButton());
         //log.info("Mouse Pressed: " + event.getButton());
     }
 
+    @Override
     public void nativeMouseReleased(NativeMouseEvent event) {
-        int code = event.getButton();
-        keyReleased(code);
+        keyReleased(event.getButton());
         //log.info("Mouse Released: " + event.getButton());
     }
 
+    @Override
     public void nativeMouseMoved(NativeMouseEvent event) {
         //log.info("Mouse Moved: " + e.getX() + ", " + e.getY());
     }
 
+    @Override
     public void nativeMouseDragged(NativeMouseEvent event) {
         //log.info("Mouse Dragged: " + e.getX() + ", " + e.getY());
     }
