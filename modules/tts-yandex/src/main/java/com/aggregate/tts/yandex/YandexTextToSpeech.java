@@ -16,13 +16,14 @@ public class YandexTextToSpeech extends AbstractVerticle {
     public void start(Future<Void> f) throws Exception {
         String key = config().getString("key");
         String speaker = config().getString("speaker", "omazh");
+        String emotion = config().getString("emotion", "neutral");
         if (key == null || key.isEmpty()) {
             f.fail("Define your key in the conf file");
             return;
         }
         vertx.eventBus().consumer("tts.say", msg -> {
             try {
-                msg.reply(URL + "&key=" + key + "&speaker=" + speaker
+                msg.reply(URL + "&key=" + key + "&speaker=" + speaker + "&emotion=" + emotion
                         + "&text=" + URLEncoder.encode(msg.body().toString(), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
             }
