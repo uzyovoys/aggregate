@@ -10,13 +10,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * Created by morfeusys on 23.02.16.
  */
 public class DateTime extends AbstractVerticle {
     private final DateFormat timeFormat = new SimpleDateFormat("HH:mm");
-    private final DateFormat dateFormat = new SimpleDateFormat("dd MMMM, EEEE");
+    private final DateFormat dateFormat = new SimpleDateFormat("dd MMMM, EEEE", new Locale("ru")); //todo best approach
 
     @Override
     public void start() throws Exception {
