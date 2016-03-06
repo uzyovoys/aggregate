@@ -7,7 +7,7 @@
 
     <groupId>com.aggregate</groupId>
     <artifactId>tts-yandex</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 
     <distributionManagement>
         <repository>
@@ -26,7 +26,6 @@
     </dependencies>
 
     <build>
-        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
