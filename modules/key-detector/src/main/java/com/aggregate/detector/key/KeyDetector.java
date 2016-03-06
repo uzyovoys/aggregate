@@ -22,6 +22,7 @@ import java.util.logging.Level;
 public class KeyDetector extends AbstractVerticle implements NativeKeyListener, NativeMouseInputListener {
     private static Logger log = LoggerFactory.getLogger(KeyDetector.class);
 
+    private boolean skipLogs;
     private Set<Integer> keySet = new HashSet<>();
     private Set<Integer> pressedKeys = new HashSet<>();
 
@@ -30,6 +31,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.OFF);
         logger.setUseParentHandlers(false);
+        skipLogs = config().getBoolean("skip-logs", false);
         JsonArray keys = config().getJsonArray("key-codes");
         if (keys == null || keys.isEmpty()) {
             log.warn("No keys are defined for hook");
@@ -55,7 +57,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         if (pressedKeys.contains(code)) return;
         vertx.eventBus().publish("key.pressed", code);
         pressedKeys.add(code);
-        log.info("Keys: " + pressedKeys);
+        if (!skipLogs) log.info("Keys: " + pressedKeys);
         if (!keySet.isEmpty() && pressedKeys.containsAll(keySet)) {
             log.info("Keyset detected");
             vertx.eventBus().publish("asr.start", null);
