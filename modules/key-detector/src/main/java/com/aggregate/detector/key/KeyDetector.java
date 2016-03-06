@@ -84,11 +84,12 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent event) {
+//        log.info(event.isActionKey() + " char"+event.getKeyCode()+": ", event.getKeyChar() + "___" + event.getKeyLocation());
     }
 
     @Override
     public void nativeMouseClicked(NativeMouseEvent event) {
-        //log.info("Mouse Clicked: " + e.getClickCount());
+        log.info("Mouse " + event.getButton() + " Clicked: " + event.getClickCount() + "\n" + pressedKeys);
     }
 
     @Override
