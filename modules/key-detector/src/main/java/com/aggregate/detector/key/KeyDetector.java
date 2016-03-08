@@ -14,10 +14,7 @@ import org.jnativehook.keyboard.NativeKeyListener;
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 
 /**
@@ -27,7 +24,6 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
     private static Logger log = LoggerFactory.getLogger(KeyDetector.class);
 
     private boolean skipLogs;
-    private Set<Integer> keySet = new HashSet<>();
     private Map<String, Set<Integer>> actionMap = new HashMap<>();
     private Set<Integer> pressedKeys = new HashSet<>();
 
@@ -38,13 +34,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         logger.setUseParentHandlers(false);
         JsonObject config = config();
         config.put("signal", "asr");
-        skipLogs = config().getBoolean("skip-logs", false);
-        JsonArray keys = config().getJsonArray("key-codes");
-        if (keys == null || keys.isEmpty()) {
-            log.warn("No keys are defined for hook");
-        } else {
-            keySet.addAll(keys.getList());
-        }
+        skipLogs = config.getBoolean("skip-logs", false);
         try {
             GlobalScreen.registerNativeHook();
             GlobalScreen.addNativeMouseListener(this);
@@ -62,36 +52,48 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         GlobalScreen.unregisterNativeHook();
     }
     private void addKeyAction(Message message){
-        JsonObject json = (JsonObject) message.body();
-        String signal = json.getString("signal");
-        JsonArray keys = config().getJsonArray("key-codes");
-        Set<Integer> set = new HashSet<Integer>();
-        if (keys == null || keys.isEmpty()) {
-            log.warn("No keys are defined for hook " + signal);
-        } else {
-            set.addAll(keys.getList());
+        try {
+            JsonObject json = (JsonObject) message.body();
+            String signal = json.getString("signal");
+            JsonArray keys = json.getJsonArray("key-codes");
+            Set<Integer> set = new HashSet<Integer>();
+            if (keys == null || keys.isEmpty()) {
+                log.warn("No keys are defined for hook " + signal);
+            } else {
+                set.addAll(keys.getList());
+            }
+            if (signal == null || Objects.equals(signal, "")) {
+                log.warn("signal is empty " + message.address());
+            } else {
+                actionMap.put(signal, set);
+            }
+        } catch(Exception e){
+            log.warn("Action was not added correctly \n" + e);
         }
-        actionMap.put(signal, set);
 
 
     }
 
     private void keyPressed(int code) {
         if (pressedKeys.contains(code)) return;
-        vertx.eventBus().publish("key.pressed", code);
         pressedKeys.add(code);
         if (!skipLogs) log.info("Keys: " + pressedKeys);
-        if (!keySet.isEmpty() && pressedKeys.containsAll(keySet)) {
-            log.info("Keyset detected");
-            vertx.eventBus().publish("asr.start", null);
+
+
+        for (Map.Entry<String, Set<Integer>> entry : actionMap.entrySet()){
+            if (!entry.getValue().isEmpty() && pressedKeys.containsAll(entry.getValue())) {
+                log.info("Keyset detected for " + entry.getKey());
+                vertx.eventBus().publish(entry.getKey() + ".start", null);
+            }
         }
     }
 
     private void keyReleased(int code) {
         if (pressedKeys.contains(code)) {
-            vertx.eventBus().publish("key.released", code);
-            if (keySet.contains(code) && pressedKeys.containsAll(keySet)) {
-                vertx.eventBus().publish("asr.stop", null);
+            for (Map.Entry<String, Set<Integer>> entry : actionMap.entrySet()) {
+                if (entry.getValue().contains(code) && pressedKeys.containsAll(entry.getValue())) {
+                    vertx.eventBus().publish(entry.getKey() + ".stop", null);
+                }
             }
         }
         pressedKeys.remove(code);
@@ -114,7 +116,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
 
     @Override
     public void nativeMouseClicked(NativeMouseEvent event) {
-        log.info("Mouse " + event.getButton() + " Clicked: " + event.getClickCount() + "\n" + pressedKeys);
+//        log.info("Mouse " + event.getButton() + " Clicked: " + event.getClickCount() + "\n" + pressedKeys);
     }
 
     @Override
