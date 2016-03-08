@@ -7,7 +7,7 @@
 
     <groupId>com.aggregate</groupId>
     <artifactId>date-time</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <distributionManagement>
         <repository>
@@ -39,7 +39,6 @@
     </dependencies>
 
     <build>
-        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
