@@ -28,6 +28,12 @@
             <artifactId>jnativehook</artifactId>
             <version>2.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.aggregate</groupId>
+            <artifactId>api</artifactId>
+            <version>0.0.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
