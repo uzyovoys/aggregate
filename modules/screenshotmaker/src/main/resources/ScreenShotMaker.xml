@@ -1,0 +1,5 @@
+<module>
+    <command id="cmd.makeScreenshot">
+        <pattern value="[*дела*|сними|снять|сфот*] (скриншот|фотограф*) [текущег*] [экран*]"/>
+    </command>
+</module>
