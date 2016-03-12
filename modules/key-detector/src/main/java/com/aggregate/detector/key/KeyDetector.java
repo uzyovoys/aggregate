@@ -39,11 +39,11 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
             GlobalScreen.registerNativeHook();
             GlobalScreen.addNativeMouseListener(this);
             GlobalScreen.addNativeKeyListener(this);
-            vertx.eventBus().consumer("key.addAction", m -> addKeyAction(m));
+            vertx.eventBus().consumer("key.addKeyAction", this::addKeyAction);
         } catch (NativeHookException e) {
             f.fail(e);
         }
-        vertx.eventBus().publish("key.addAction", config);
+        vertx.eventBus().send("key.addKeyAction", config);
         f.complete();
     }
 
@@ -56,16 +56,16 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
             JsonObject json = (JsonObject) message.body();
             String signal = json.getString("signal");
             JsonArray keys = json.getJsonArray("key-codes");
-            Set<Integer> set = new HashSet<Integer>();
+            Set<Integer> set = new HashSet<>();
             if (keys == null || keys.isEmpty()) {
                 log.warn("No keys are defined for hook " + signal);
             } else {
                 set.addAll(keys.getList());
-            }
-            if (signal == null || Objects.equals(signal, "")) {
-                log.warn("signal is empty " + message.address());
-            } else {
-                actionMap.put(signal, set);
+                if (signal == null || Objects.equals(signal, "")) {
+                    log.warn("signal is empty " + message.address());
+                } else {
+                    actionMap.put(signal, set);
+                }
             }
         } catch(Exception e){
             log.warn("Action was not added correctly \n" + e);
@@ -80,21 +80,17 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         if (!skipLogs) log.info("Keys: " + pressedKeys);
 
 
-        for (Map.Entry<String, Set<Integer>> entry : actionMap.entrySet()){
-            if (!entry.getValue().isEmpty() && pressedKeys.containsAll(entry.getValue())) {
-                log.info("Keyset detected for " + entry.getKey());
-                vertx.eventBus().publish(entry.getKey() + ".start", null);
-            }
-        }
+        actionMap.entrySet().stream().filter(entry -> pressedKeys.containsAll(entry.getValue())).forEach(entry -> {
+            log.info("Keyset detected for " + entry.getKey());
+            vertx.eventBus().send(entry.getKey() + ".start", null);
+        });
     }
 
     private void keyReleased(int code) {
         if (pressedKeys.contains(code)) {
-            for (Map.Entry<String, Set<Integer>> entry : actionMap.entrySet()) {
-                if (entry.getValue().contains(code) && pressedKeys.containsAll(entry.getValue())) {
-                    vertx.eventBus().publish(entry.getKey() + ".stop", null);
-                }
-            }
+            actionMap.entrySet().stream().filter(entry -> entry.getValue().contains(code) && pressedKeys.containsAll(entry.getValue())).forEach(entry -> {
+                vertx.eventBus().send(entry.getKey() + ".stop", null);
+            });
         }
         pressedKeys.remove(code);
     }

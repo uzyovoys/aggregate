@@ -31,7 +31,12 @@ public class Dictation extends AbstractVerticle {
         vertx.eventBus().consumer("dictation.start", m -> startAction());
         vertx.eventBus().consumer("dictation.stop", m -> stopAction());
         vertx.eventBus().consumer("cmd.dictation.type", m -> type(Request.fromMessage(m)));
-        vertx.eventBus().publish("key.addAction", config);
+        vertx.eventBus().publish("key.addKeyAction", config);
+        vertx.eventBus().consumer("mr.deployed", m -> {
+            if (m.body().toString().matches("(.*)key-detector")){
+                vertx.eventBus().publish("key.addKeyAction", config);
+            }
+        });
     }
 
     private void type(Request request) {
