@@ -14,7 +14,10 @@ import org.jnativehook.keyboard.NativeKeyListener;
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -61,7 +64,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
                 log.warn("No keys are defined for hook " + signal);
             } else {
                 set.addAll(keys.getList());
-                if (signal == null || Objects.equals(signal, "")) {
+                if (signal == null || signal.equals("")) {
                     log.warn("signal is empty " + message.address());
                 } else {
                     actionMap.put(signal, set);
