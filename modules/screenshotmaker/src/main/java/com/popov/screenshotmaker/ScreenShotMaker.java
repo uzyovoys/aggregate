@@ -1,4 +1,4 @@
-package com.aggregate.screenshotmaker;
+package com.popov.screenshotmaker;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.logging.Logger;
@@ -14,8 +14,8 @@ import java.io.IOException;
  * Created by AntonPopov on 05.03.16.
  */
 public class ScreenShotMaker extends AbstractVerticle {
-    private static Logger log = LoggerFactory.getLogger(ScreenShotMaker.class);
     public static final String TEMP_PATH = System.getProperty("java.io.tmpdir");
+    private static Logger log = LoggerFactory.getLogger(ScreenShotMaker.class);
 
     @Override
     public void start() throws Exception {
@@ -34,10 +34,16 @@ public class ScreenShotMaker extends AbstractVerticle {
         }
 
         BufferedImage screenShot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        createDir(TEMP_PATH + "ScreenShot/");
-        File screenShotPathToFile = null;
+        File path;
         try {
-            screenShotPathToFile = new File(TEMP_PATH + "ScreenShot/" + fileName);
+            path = new File(TEMP_PATH, "ScreenShot");
+        } catch (Exception e) {
+            log.error(e);
+            return;
+        }
+        File screenShotPathToFile;
+        try {
+            screenShotPathToFile = new File(path + fileName);
         } catch (Exception e) {
             log.error(e);
             return;
@@ -45,33 +51,28 @@ public class ScreenShotMaker extends AbstractVerticle {
 
         try {
             ImageIO.write(screenShot, "jpg", screenShotPathToFile);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             log.error(e);
             return;
         }
 
         openScreenShotFolder();
 
-}
+    }
 
     public void openScreenShotFolder() {
         Desktop desktop;
         if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
-        }else {
+        } else {
             log.warn("Desktop is not supported");
             return;
         }
         try {
-            desktop.open((new File(System.getProperty("java.io.tmpdir") + "ScreenShot/")));
+            desktop.open(new File(TEMP_PATH + "ScreenShot"));
         } catch (IOException e) {
             log.error(e);
             return;
         }
-    }
-    public static void createDir(String path){
-        File f = new File(path);
-        f.mkdirs();
     }
 }
