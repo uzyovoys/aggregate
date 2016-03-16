@@ -1,4 +1,4 @@
-package com.aggregate.screenshotmaker;
+package com.popov.screenshotmaker;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.logging.Logger;
@@ -9,8 +9,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by AntonPopov on 05.03.16.
@@ -26,7 +24,7 @@ public class ScreenShotMaker extends AbstractVerticle {
     }
 
     private void captureScreen() {
-        String fileName = "/Screenshot_" + new SimpleDateFormat("yyyy-mm-dd:hh-mm").format(new Date()) + ".jpg";
+        String fileName = "Screenshot_" + Math.random() + ".jpg";
         Robot robot;
         try {
             robot = new Robot();
@@ -45,7 +43,6 @@ public class ScreenShotMaker extends AbstractVerticle {
         }
         File screenShotPathToFile;
         try {
-            log.debug(path.getAbsolutePath());
             screenShotPathToFile = new File(path + fileName);
         } catch (Exception e) {
             log.error(e);
