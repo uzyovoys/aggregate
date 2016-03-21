@@ -44,8 +44,13 @@ public class ScreenShotMaker extends AbstractVerticle {
         File screenShotPathToFile;
         screenShotPathToFile = new File(path, fileName);
 
+
+        path.mkdirs();
+        if (!path.exists()){
+            log.error("Can not create directory for screenshots");
+            return;
+        }
         try {
-            if (!path.mkdirs()) log.error("Can not create directory for screenshots");
             ImageIO.write(screenShot, "jpg", screenShotPathToFile);
         } catch (IOException e) {
             log.error(e);
@@ -65,7 +70,7 @@ public class ScreenShotMaker extends AbstractVerticle {
             return;
         }
         try {
-            desktop.open(new File(path + "ScreenShot"));
+            desktop.open(path);
         } catch (IOException e) {
             log.error(e);
             return;
