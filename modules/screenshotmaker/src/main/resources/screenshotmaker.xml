@@ -3,25 +3,6 @@
         <pattern value="[*дела*|сними|снять|сфот*] (скриншот|фотограф*) [текущег*] [экран*]"/>
         <command id="cmd.makeScreenshot">
             <pattern value="[и] (ещё|еще) один *"/>
-            <command id="cmd.makeScreenshot">
-                <pattern value="[и] (ещё|еще) один *"/>
-                <command id="cmd.makeScreenshot">
-                    <pattern value="[и] (ещё|еще) один *"/>
-                    <command id="cmd.makeScreenshot">
-                        <pattern value="[и] (ещё|еще) один *"/>
-                        <command id="cmd.makeScreenshot">
-                            <pattern value="[и] (ещё|еще) один *"/>
-                            <command id="cmd.makeScreenshot">
-                                <pattern value="[и] (ещё|еще) один *"/>
-                                <command id="cmd.makeScreenshot">
-                                    <pattern value="[и] (ещё|еще) один *"/>
-
-                                </command>
-                            </command>
-                        </command>
-                    </command>
-                </command>
-            </command>
         </command>
     </command>
 </module>

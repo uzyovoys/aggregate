@@ -1,6 +1,7 @@
 package com.popov.screenshotmaker;
 
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
@@ -21,11 +22,12 @@ public class ScreenShotMaker extends AbstractVerticle {
 
     @Override
     public void start() throws Exception {
-        vertx.eventBus().consumer("cmd.makeScreenshot", m -> captureScreen());
+        vertx.eventBus().consumer("cmd.makeScreenshot", m -> captureScreen(m));
 
     }
 
-    private void captureScreen() {
+    private void captureScreen(Message m) {
+
         String fileName = "ScreenShot_" + new SimpleDateFormat("yyyy-MM-dd--HH-mm-ss").format(new Date()) + ".jpg";
         Robot robot;
         try {
@@ -36,38 +38,25 @@ public class ScreenShotMaker extends AbstractVerticle {
         }
 
         BufferedImage screenShot = robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+
         File path;
-        try {
-            path = new File(TEMP_PATH, "ScreenShot");
-        } catch (Exception e) {
-            log.error(e);
-            return;
-        }
+        path = new File(TEMP_PATH, "ScreenShot");
         File screenShotPathToFile;
-        try {
-            screenShotPathToFile = new File(path, fileName);
-        } catch (Exception e) {
-            log.error(e);
-            return;
-        }
+        screenShotPathToFile = new File(path, fileName);
 
         try {
-            try {
-                path.mkdirs();
-            } catch (Exception e) {
-                log.error(e);
-            }
+            if (!path.mkdirs()) log.error("Can not create directory for screenshots");
             ImageIO.write(screenShot, "jpg", screenShotPathToFile);
         } catch (IOException e) {
             log.error(e);
             return;
         }
 
-        openScreenShotFolder();
+        openScreenShotFolder(path);
 
     }
 
-    public void openScreenShotFolder() {
+    public void openScreenShotFolder(File path) {
         Desktop desktop;
         if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
@@ -76,7 +65,7 @@ public class ScreenShotMaker extends AbstractVerticle {
             return;
         }
         try {
-            desktop.open(new File(TEMP_PATH + "ScreenShot"));
+            desktop.open(new File(path + "ScreenShot"));
         } catch (IOException e) {
             log.error(e);
             return;
