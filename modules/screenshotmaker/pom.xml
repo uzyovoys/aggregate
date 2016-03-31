@@ -7,7 +7,14 @@
 
     <groupId>com.popov</groupId>
     <artifactId>screenshotmaker</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-aggregate</id>
+            <url>https://api.bintray.com/maven/uzyovoys/aggregate/screenshotmaker/;publish=1</url>
+        </repository>
+    </distributionManagement>
 
     <repositories>
         <repository>
