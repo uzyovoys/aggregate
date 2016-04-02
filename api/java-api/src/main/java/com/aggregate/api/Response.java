@@ -73,7 +73,7 @@ public class Response extends JsonObject {
             if (speech != null) speeches.add(speech);
         }
         String context = json.getString("context", json.getString("module"));
-        Boolean modal = json.getBoolean("modal");
-        return new Response(speeches, context, modal != null && modal);
+        Boolean modal = json.getBoolean("modal", false);
+        return new Response(speeches, context, modal);
     }
 }
