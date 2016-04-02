@@ -4,7 +4,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.*;
@@ -21,9 +20,9 @@ public class Response extends JsonObject {
     public final List<String> speeches;
 
     /**
-     * Module's id to switch dialog's context (optional)
+     * Dialog's context (optional)
      */
-    public final String moduleId;
+    public final String context;
 
     /**
      * If switching context is modal or not
@@ -38,23 +37,23 @@ public class Response extends JsonObject {
         this(speeches, null, false);
     }
 
-    public Response(String speech, String moduleId, boolean modal) {
-        this(singletonList(speech), moduleId, modal);
+    public Response(String speech, String context, boolean modal) {
+        this(singletonList(speech), context, modal);
     }
 
-    public Response(String moduleId, boolean modal) {
-        this(emptyList(), moduleId, modal);
+    public Response(String context, boolean modal) {
+        this(emptyList(), context, modal);
     }
 
-    public Response(List<String> speeches, String moduleId, boolean modal) {
+    public Response(List<String> speeches, String context, boolean modal) {
         this.speeches = unmodifiableList(speeches);
-        this.moduleId = moduleId;
+        this.context = context;
         this.modal = modal;
         JsonArray array = new JsonArray();
         speeches.forEach(s -> {
             if (s != null && !s.isEmpty()) array.add(s);
         });
-        put("moduleId", moduleId);
+        put("context", context);
         put("modal", modal);
         put("speeches", array);
     }
@@ -73,8 +72,8 @@ public class Response extends JsonObject {
             String speech = json.getString("speech");
             if (speech != null) speeches.add(speech);
         }
-        String moduleId = json.getString("moduleId");
-        boolean modal = json.getBoolean("modal");
-        return new Response(speeches, moduleId, modal);
+        String context = json.getString("context", json.getString("module"));
+        Boolean modal = json.getBoolean("modal");
+        return new Response(speeches, context, modal != null && modal);
     }
 }
