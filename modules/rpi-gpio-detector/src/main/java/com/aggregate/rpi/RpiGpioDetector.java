@@ -17,12 +17,15 @@ public class RpiGpioDetector extends AbstractVerticle implements GpioPinListener
     private GpioController controller;
     private Set<PinData> output;
     private Map<String, Integer> states = Collections.synchronizedMap(new HashMap<>());
+    private long listenTimeout;
+    private long detectionTimestamp;
     private boolean listening;
 
     @Override
     public void start(Future<Void> f) throws Exception {
         Set<PinData> input = getPins("input");
         output = getPins("output");
+        listenTimeout = config().getLong("listenTimeout", 0l);
 
         if (output.isEmpty()) {
             f.fail(new IllegalArgumentException("Define output pins in the config file"));
@@ -54,6 +57,8 @@ public class RpiGpioDetector extends AbstractVerticle implements GpioPinListener
             controller.provisionDigitalInputPin(pin).addListener(this);
         });
 
+        vertx.eventBus().consumer("asr.stop", m -> listening = false);
+
         f.complete();
     }
 
@@ -81,12 +86,15 @@ public class RpiGpioDetector extends AbstractVerticle implements GpioPinListener
     private synchronized void listen() {
         if (!listening) {
             listening = true;
+            detectionTimestamp = System.currentTimeMillis();
             vertx.eventBus().publish("asr.start", null);
         }
     }
 
     private synchronized void finish() {
-        if (listening) {
+        if (System.currentTimeMillis() - detectionTimestamp < listenTimeout) {
+            vertx.eventBus().publish("asr.listen", null);
+        } else if (listening) {
             listening = false;
             vertx.eventBus().publish("asr.stop", null);
         }
