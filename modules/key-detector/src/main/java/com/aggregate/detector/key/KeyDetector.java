@@ -20,9 +20,11 @@ import java.util.logging.Level;
  * Created by morfeusys on 18.02.16.
  */
 public class KeyDetector extends AbstractVerticle implements NativeKeyListener, NativeMouseInputListener {
+    private static final long RELEASE_TIMEOUT = 200;
     private static Logger log = LoggerFactory.getLogger(KeyDetector.class);
 
     private boolean skipLogs;
+    private long pressedTimestamp;
     private Set<Integer> keySet = new HashSet<>();
     private Set<Integer> pressedKeys = new HashSet<>();
 
@@ -60,6 +62,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         if (!skipLogs) log.info("Keys: " + pressedKeys);
         if (!keySet.isEmpty() && pressedKeys.containsAll(keySet)) {
             log.info("Keyset detected");
+            pressedTimestamp = System.currentTimeMillis();
             vertx.eventBus().publish("asr.start", null);
         }
     }
@@ -68,7 +71,11 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         if (pressedKeys.contains(code)) {
             vertx.eventBus().publish("key.released", code);
             if (keySet.contains(code) && pressedKeys.containsAll(keySet)) {
-                vertx.eventBus().publish("asr.stop", null);
+                if (System.currentTimeMillis() - pressedTimestamp < RELEASE_TIMEOUT) {
+                    vertx.eventBus().publish("asr.listen", null);
+                } else {
+                    vertx.eventBus().publish("asr.stop", null);
+                }
             }
         }
         pressedKeys.remove(code);
