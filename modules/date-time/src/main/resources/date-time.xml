@@ -1,4 +1,4 @@
-<module>
+<context>
     <command id="cmd.datetime.time">
         <pattern value="* который * час *"/>
         <pattern value="* скольк* * врем* *"/>
@@ -11,4 +11,4 @@
             <pattern value="* $Date"/>
         </command>
     </command>
-</module>
+</context>
