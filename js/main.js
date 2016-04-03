@@ -157,7 +157,16 @@ $(document).ready(function(){
 			}
 		}
 	});
-	
+
+    $('.code').typed({
+        strings: ['Java', 'Javascript', 'Typescript', 'Groovy', 'Ruby'],
+        loop: true, showCursor: false, typeSpeed: 100
+    });
+
+    $('.promotion').typed({
+        strings: ['использовать', 'создавать'],
+        loop: true, showCursor: false, typeSpeed: 100
+    });
 });
 
 
