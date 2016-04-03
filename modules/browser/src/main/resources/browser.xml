@@ -1,11 +1,10 @@
-<module>
-    <pattern name="BrowserSite">
-        <pattern value="*.*"/>
-    </pattern>
+<context>
+    <pattern name="DomainName" value="(ru|su|com|org|net|gov)"/>
+    <pattern name="BrowserSiteURL" value="*.$DomainName"/>
+    <pattern name="BrowserSiteName" value="content://config:sites"/>
 
     <command id="cmd.browser.open">
-        <pattern value="[* [откр*|запус*|покажи*|показ*|выйди*|выйти]] * (сайт*|site) $BrowserSite"/>
-        <pattern value="* (откр*|запус*|покажи*|показ*|выйди*|выйти) * [на] [сайт*|site] $BrowserSite"/>
-        <pattern value="*.*"/>
+        <pattern value="[* (откр*|запус*|покажи*|показ*|выйди*|выйти) * [сайт*|site]] ($BrowserSiteName | $BrowserSiteURL)"/>
+        <pattern value="* (сайт*|site) ($BrowserSiteName | $BrowserSiteURL)"/>
     </command>
-</module>
+</context>
