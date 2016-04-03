@@ -1,7 +1,8 @@
 ### Распознавание речи Google
 Этот модуль необходим для распознавания вашей речи. То есть, чтобы Агрегат смог услышать вас.
 
-[Скачать версию 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/asr-google/1.0.0/asr-google-1.0.0.jar)
+[Версия 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/asr-google/1.0.1/asr-google-1.0.1.jar)
+[Версия 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/asr-google/1.0.0/asr-google-1.0.0.jar)
 
 #### Установка
 Перед использованием вам необходимо получить персональный ключ доступа к онлайн сервису распознавания речи Google.
@@ -28,3 +29,8 @@
 
 #### Ограничение на количество запросов
 В документации Google сказано, что на данный сервис действует ограничение в 50 запросов в сутки. Но, как показывает практика, Google может не учитывать этот лимит.
+
+### Список изменений
+#### 1.0.1
+
+- Исправлен баг #15
