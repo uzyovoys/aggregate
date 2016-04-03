@@ -29,7 +29,6 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
 
     private boolean skipLogs;
     private long pressedTimestamp;
-    private Set<Integer> keySet = new HashSet<>();
     private Map<String, Set<Integer>> actionMap = new HashMap<>();
     private Set<Integer> pressedKeys = new HashSet<>();
 
@@ -39,15 +38,18 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         logger.setLevel(Level.OFF);
         logger.setUseParentHandlers(false);
         JsonObject config = config();
-        config.put("signal", "asr");
+        config.put("signal", "key");
         skipLogs = config.getBoolean("skip-logs", false);
         try {
             GlobalScreen.registerNativeHook();
             GlobalScreen.addNativeMouseListener(this);
             GlobalScreen.addNativeKeyListener(this);
             vertx.eventBus().consumer("key.addKeyAction", this::addKeyAction);
+            vertx.eventBus().consumer("key.start", this::onKeyStart);
+            vertx.eventBus().consumer("key.stop", this::onKeyStop);
         } catch (NativeHookException e) {
             f.fail(e);
+            return;
         }
         vertx.eventBus().send("key.addKeyAction", config);
         f.complete();
@@ -57,6 +59,20 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
     public void stop() throws Exception {
         GlobalScreen.unregisterNativeHook();
     }
+
+    private void onKeyStart(Message message) {
+        pressedTimestamp = System.currentTimeMillis();
+        vertx.eventBus().publish("asr.start", null);
+    }
+
+    private void onKeyStop(Message message) {
+        if (System.currentTimeMillis() - pressedTimestamp < RELEASE_TIMEOUT) {
+            vertx.eventBus().publish("asr.listen", null);
+        } else {
+            vertx.eventBus().publish("asr.stop", null);
+        }
+    }
+
     private void addKeyAction(Message message){
         try {
             JsonObject json = (JsonObject) message.body();
@@ -68,16 +84,14 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
             } else {
                 set.addAll(keys.getList());
                 if (signal == null || signal.equals("")) {
-                    log.warn("signal is empty " + message.address());
+                    log.warn("Signal is empty " + message.address());
                 } else {
                     actionMap.put(signal, set);
                 }
             }
         } catch(Exception e){
-            log.warn("Action was not added correctly \n" + e);
+            log.warn("Action was not added correctly", e);
         }
-
-
     }
 
     private void keyPressed(int code) {
@@ -85,8 +99,7 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         pressedKeys.add(code);
         if (!skipLogs) log.info("Keys: " + pressedKeys);
 
-
-        actionMap.entrySet().stream().filter(entry -> pressedKeys.containsAll(entry.getValue())).forEach(entry -> {
+        actionMap.entrySet().stream().filter(entry -> pressedKeys.equals(entry.getValue())).forEach(entry -> {
             log.info("Keyset detected for " + entry.getKey());
             vertx.eventBus().send(entry.getKey() + ".start", null);
         });
@@ -94,9 +107,9 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
 
     private void keyReleased(int code) {
         if (pressedKeys.contains(code)) {
-            actionMap.entrySet().stream().filter(entry -> entry.getValue().contains(code) && pressedKeys.containsAll(entry.getValue())).forEach(entry -> {
-                vertx.eventBus().send(entry.getKey() + ".stop", null);
-            });
+            actionMap.entrySet().stream().filter(entry ->
+                    entry.getValue().contains(code) && pressedKeys.equals(entry.getValue()))
+                    .forEach(e -> vertx.eventBus().send(e.getKey() + ".stop", null));
         }
         pressedKeys.remove(code);
     }
