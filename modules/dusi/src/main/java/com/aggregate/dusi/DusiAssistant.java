@@ -82,7 +82,7 @@ public class DusiAssistant extends AbstractVerticle {
             speeches.addAll(Arrays.asList(text.split("\\|")));
         }
         boolean modal = json.getBoolean("modal", false);
-        vertx.eventBus().send("response", new Response(speeches, modal ? "com.aggregate.dusi" : null, modal));
+        vertx.eventBus().publish("response", new Response(speeches, modal ? "com.aggregate.dusi" : null, modal));
         if (uri != null && Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(URIUtils.parse(uri));
