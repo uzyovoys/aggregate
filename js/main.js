@@ -158,7 +158,7 @@ $(document).ready(function(){
 		}
 	});
 
-    $('.code').typed({
+    $('.langs').typed({
         strings: ['Java', 'Javascript', 'Typescript', 'Groovy', 'Ruby'],
         loop: true, showCursor: false, typeSpeed: 100
     });

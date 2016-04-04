@@ -967,6 +967,10 @@ ul.external li a:hover {
     border: 2px solid #ccb400;
 }
 
+.langs {
+    color: #ff5b0f;
+    font-size: 3em;
+}
 
 /*=================================================================
 	Contact
