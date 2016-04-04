@@ -1,7 +1,7 @@
 ### Распознавание речи Google
 Этот модуль необходим для распознавания вашей речи. То есть, чтобы Агрегат смог услышать вас.
 
-[Версия 1.1.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/asr-google/1.1.0/asr-google-1.1.0.jar)
+[Версия 1.1.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/asr-google/1.1.0/asr-google-1.1.0.jar)  
 [Версия 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/asr-google/1.0.0/asr-google-1.0.0.jar)
 
 #### Установка
