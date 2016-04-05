@@ -1,4 +1,4 @@
-define(['util/Storage', 'util/i18n'], function(Storage, i16n) {
+define(['util/Storage', 'util/i18n'], function(Storage, i18n) {
     var TTS = function(handler) {
         var counter = 0;
 
@@ -14,7 +14,7 @@ define(['util/Storage', 'util/i18n'], function(Storage, i16n) {
 
             u.text = speech;
             u.voice = voices.length ? voices[0] : null;
-            u.lang = voices.length ? voices[0].lang : i16n('locale');
+            u.lang = voices.length ? voices[0].lang : i18n('locale');
             u.pitch = parseInt(Storage.local('pitch', TTS.options));
             u.rate = parseFloat(Storage.local('rate', TTS.options));
 
@@ -46,7 +46,7 @@ define(['util/Storage', 'util/i18n'], function(Storage, i16n) {
     TTS.getVoices = function() {
         if (!TTS.isSupported()) return [];
         return speechSynthesis.getVoices().filter(function(v) {
-            return v.lang === i16n('locale');
+            return v.lang === i18n('locale');
         });
     };
 
