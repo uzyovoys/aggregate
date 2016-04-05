@@ -1,0 +1,12 @@
+body {
+    background-color: #242424;
+    padding-top: 50px;
+}
+
+#main {
+    margin-top: 50px;
+}
+
+p.message {
+    margin: 4px;
+}

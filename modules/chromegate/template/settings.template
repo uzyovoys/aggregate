@@ -1,0 +1,53 @@
+<div class="well animated fadeInUp">
+    <form action="#/settings" method="post" class="form-horizontal" id="settings">
+        <fieldset>
+            <legend data-i18n="settings.legend">Settings</legend>
+            <div class="form-group form-group">
+                <label for="name" class="col-lg-4 control-label" data-i18n="settings.assistant.name.label">Your assistant's name</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="name" name="name" value="<%= name %>">
+                </div>
+            </div>
+            <div class="form-group form-group">
+                <label for="address" class="col-lg-4 control-label" data-i18n="settings.address.label">Aggregate's address</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="address" name="address" value="<%= address %>">
+                </div>
+            </div>
+            <div class="form-group form-group">
+                <label for="voice" class="col-lg-4 control-label">Синтезатор речи</label>
+                <div class="col-lg-8">
+                    <select id="voice" name="voice" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group form-group">
+                <label for="pitch" class="col-lg-4 control-label">Тембр речи</label>
+                <div class="col-lg-8">
+                    <select id="pitch" name="pitch" class="form-control">
+                        <option value="1">Нормальный</option>
+                        <option value="0">Низкий</option>
+                        <option value="2">Высокий</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group form-group">
+                <label for="rate" class="col-lg-4 control-label">Скорость речи</label>
+                <div class="col-lg-8">
+                    <select id="rate" name="rate" class="form-control">
+                        <option value="1.05">Нормальная</option>
+                        <option value="0.5">Медленная</option>
+                        <option value="2">Быстрая</option>
+                        <option value="3">Очень быстрая</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-warning pull-right" data-i18n="settings.save">Save</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div id="message"></div>
