@@ -85,7 +85,7 @@ public class DusiAssistant extends AbstractVerticle {
         vertx.eventBus().publish("response", new Response(speeches, modal ? "com.aggregate.dusi" : null, modal));
         if (uri != null && Desktop.isDesktopSupported()) {
             try {
-                Desktop.getDesktop().browse(URIUtils.parse(uri));
+                Desktop.getDesktop().browse(new URI(uri));
             } catch (Exception e) {
                 log.error("Cannot open URI", e);
             }
