@@ -18,10 +18,12 @@ mail.ru
 Для этого в файле _browser.json_ в директории _conf_ добавьте конфигурацию следующего вида:
 
 ```javascript
-"sites" : {
-  "ВКонтакте" : "vk_com",
-  "Одноклассники" : "ok_ru",
-  "Facebook" : "facebook_com"
+{
+  "sites" : {
+    "ВКонтакте" : "vk_com",
+    "Одноклассники" : "ok_ru",
+    "Facebook" : "facebook_com"
+  }
 }
 ```
 
