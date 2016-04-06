@@ -13,7 +13,7 @@
 **Удалите текущий синтезатор речи в вашем Агрегате!**
 
 ### Скрытая версия
-[Установщик для Windows](https://drive.google.com/file/d/0B1eej83izzfvRWhIV2tJaC1DcDA/view)
+[Установщик для Windows](https://drive.google.com/file/d/0B1eej83izzfvWDlrYUV2QW9HcTA/view)
 
 Вы можете использовать эту версию, если не хотите, чтобы браузер Chrome был открыт все время.
 
