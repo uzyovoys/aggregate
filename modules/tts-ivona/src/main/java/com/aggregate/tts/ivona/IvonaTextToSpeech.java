@@ -37,7 +37,6 @@ public class IvonaTextToSpeech extends AbstractVerticle {
             Voice voice = new Voice();
             voice.setLanguage(config().getString("lang", "ru-RU"));
             voice.setName(config().getString("voice", "Tatyana"));
-            voice.setGender(config().getString("gender", "Female"));
             input.setData((String) msg.body());
             CreateSpeechRequest request = new CreateSpeechRequest();
             request.setInput(input);

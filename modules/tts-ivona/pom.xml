@@ -7,7 +7,7 @@
 
     <groupId>com.aggregate</groupId>
     <artifactId>tts-ivona</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <distributionManagement>
         <repository>

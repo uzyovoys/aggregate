@@ -4,6 +4,8 @@
 [Версия 1.0.1](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/tts-ivona/1.0.1/tts-ivona-1.0.1.jar)
 [Версия 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/tts-ivona/1.0.0/tts-ivona-1.0.0.jar)
 
+### Внимание! Этот API будет закрыт с 30 июня 2017 года!
+
 #### Установка
 Для работы необходимо получить персональные ключи доступа к сервису Ivona Speech Cloud.
 50000 запросов в месяц предоставляются *бесплатно*. Этого вполне достаточно для каждодневного использования.

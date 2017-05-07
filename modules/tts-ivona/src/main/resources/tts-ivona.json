@@ -3,7 +3,6 @@
   "options" : {
     "config": {
       "voice" : "Tatyana",
-      "gender" : "female",
       "lang" : "ru-RU"
     }
   }
