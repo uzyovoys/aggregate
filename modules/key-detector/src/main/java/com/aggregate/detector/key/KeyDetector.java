@@ -11,8 +11,6 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import org.jnativehook.mouse.NativeMouseEvent;
-import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,14 +21,14 @@ import java.util.logging.Level;
 /**
  * Created by morfeusys on 18.02.16.
  */
-public class KeyDetector extends AbstractVerticle implements NativeKeyListener, NativeMouseInputListener {
+public class KeyDetector extends AbstractVerticle implements NativeKeyListener {
     private static final long RELEASE_TIMEOUT = 200;
     private static Logger log = LoggerFactory.getLogger(KeyDetector.class);
 
     private boolean skipLogs;
     private long pressedTimestamp;
-    private Map<String, Set<Integer>> actionMap = new HashMap<>();
-    private Set<Integer> pressedKeys = new HashSet<>();
+    private Map<String, Set<String>> actionMap = new HashMap<>();
+    private Set<String> pressedKeys = new HashSet<>();
 
     @Override
     public void start(Future<Void> f) throws Exception {
@@ -42,7 +40,6 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         skipLogs = config.getBoolean("skip-logs", false);
         try {
             GlobalScreen.registerNativeHook();
-            GlobalScreen.addNativeMouseListener(this);
             GlobalScreen.addNativeKeyListener(this);
             vertx.eventBus().consumer("key.addKeyAction", this::addKeyAction);
             vertx.eventBus().consumer("key.start", this::onKeyStart);
@@ -77,8 +74,8 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         try {
             JsonObject json = (JsonObject) message.body();
             String signal = json.getString("signal");
-            JsonArray keys = json.getJsonArray("key-codes");
-            Set<Integer> set = new HashSet<>();
+            JsonArray keys = json.getJsonArray("keys");
+            Set<String> set = new HashSet<>();
             if (keys == null || keys.isEmpty()) {
                 log.warn("No keys are defined for hook " + signal);
             } else {
@@ -94,9 +91,9 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         }
     }
 
-    private void keyPressed(int code) {
-        if (pressedKeys.contains(code)) return;
-        pressedKeys.add(code);
+    private void keyPressed(String key) {
+        if (pressedKeys.contains(key)) return;
+        pressedKeys.add(key);
         if (!skipLogs) log.info("Keys: " + pressedKeys);
 
         actionMap.entrySet().stream().filter(entry -> pressedKeys.equals(entry.getValue())).forEach(entry -> {
@@ -105,55 +102,28 @@ public class KeyDetector extends AbstractVerticle implements NativeKeyListener, 
         });
     }
 
-    private void keyReleased(int code) {
-        if (pressedKeys.contains(code)) {
+    private void keyReleased(String key) {
+        if (pressedKeys.contains(key)) {
             actionMap.entrySet().stream().filter(entry ->
-                    entry.getValue().contains(code) && pressedKeys.equals(entry.getValue()))
+                    entry.getValue().contains(key) && pressedKeys.equals(entry.getValue()))
                     .forEach(e -> vertx.eventBus().send(e.getKey() + ".stop", null));
         }
-        pressedKeys.remove(code);
+        pressedKeys.remove(key);
     }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
-        keyPressed(event.getRawCode());
+        keyPressed(NativeKeyEvent.getKeyText(event.getKeyCode()));
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent event) {
-        keyReleased(event.getRawCode());
+        keyReleased(NativeKeyEvent.getKeyText(event.getKeyCode()));
     }
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent event) {
 //        log.info(event.isActionKey() + " char"+event.getKeyCode()+": ", event.getKeyChar() + "___" + event.getKeyLocation());
-    }
-
-    @Override
-    public void nativeMouseClicked(NativeMouseEvent event) {
-//        log.info("Mouse " + event.getButton() + " Clicked: " + event.getClickCount() + "\n" + pressedKeys);
-    }
-
-    @Override
-    public void nativeMousePressed(NativeMouseEvent event) {
-        keyPressed(event.getButton());
-        //log.info("Mouse Pressed: " + event.getButton());
-    }
-
-    @Override
-    public void nativeMouseReleased(NativeMouseEvent event) {
-        keyReleased(event.getButton());
-        //log.info("Mouse Released: " + event.getButton());
-    }
-
-    @Override
-    public void nativeMouseMoved(NativeMouseEvent event) {
-        //log.info("Mouse Moved: " + e.getX() + ", " + e.getY());
-    }
-
-    @Override
-    public void nativeMouseDragged(NativeMouseEvent event) {
-        //log.info("Mouse Dragged: " + e.getX() + ", " + e.getY());
     }
 
 }
