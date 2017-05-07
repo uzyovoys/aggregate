@@ -1,6 +1,7 @@
 ### Синтезатор речи Ivona
 С помощью данного модуля можно синтезировать речь с помощью онлайн сервиса Ivona.
 
+[Версия 1.0.2](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/tts-ivona/1.0.2/tts-ivona-1.0.2.jar)
 [Версия 1.0.1](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/tts-ivona/1.0.1/tts-ivona-1.0.1.jar)
 [Версия 1.0.0](https://bintray.com/artifact/download/uzyovoys/aggregate/com/aggregate/tts-ivona/1.0.0/tts-ivona-1.0.0.jar)
 
@@ -39,6 +40,11 @@
 На данный момент поддерживаются два голоса - Maxim и Tatyana. _По умолчанию используется голос Tatyana_.
 
 ### Список изменений
+
+#### 1.0.2
+
+- Поддержка обновленного API
+
 #### 1.0.1
 
 - Исправлена стандартная конфигурация
